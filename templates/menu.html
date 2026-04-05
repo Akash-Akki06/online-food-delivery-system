@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>Menu - {{ restaurant.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .restaurant-header {
+            background-color: var(--primary-red);
+            color: var(--white);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+        .restaurant-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .badge {
+            background-color: #f1f1f1;
+            color: var(--dark-text);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.8rem;
+        }
+        .empty-state { text-align: center; padding: 4rem 2rem; color: var(--gray-text); }
+        .food-image { height: 200px; width: 100%; object-fit: cover; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo">QuickBite</a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/restaurants" style="color: var(--primary-red); font-weight: 700;">Restaurants</a></li>
+            <li><a href="/cart" class="nav-btn" style="background-color: var(--primary-red); color: white;">Cart</a></li>
+            <li><a href="/logout" class="nav-btn" style="background-color: var(--gray-text);">Logout</a></li>
+        </ul>
+    </nav>
+
+    <header class="restaurant-header">
+        <h1>{{ restaurant.name }}</h1>
+        <p>{{ restaurant.category }} in {{ restaurant.city }}</p>
+    </header>
+
+    <section class="section">
+        <h2 class="section-title">Menu</h2>
+        {% if food_items %}
+        <div class="grid">
+            {% for item in food_items %}
+            <div class="food-card">
+                <img src="{{ item.image }}" alt="{{ item.name }}" class="food-image" onerror="this.src='https://via.placeholder.com/300?text=Food'">
+                <div class="food-info">
+                    <h3 class="food-title">{{ item.name }}</h3>
+                    <div class="food-meta">
+                        <span class="food-price">₹{{ item.price }}</span>
+                        <!-- Add to cart route -->
+                        <a href="/add_to_cart/{{ item.id }}" class="btn-primary" style="padding: 0.4rem 1rem; font-size: 0.9rem; border-radius: 8px; text-decoration: none; display: inline-block;">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <p>No menu items available for this restaurant.</p>
+        </div>
+        {% endif %}
+    </section>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

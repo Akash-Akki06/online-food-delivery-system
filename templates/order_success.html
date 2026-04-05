@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .success-box {
+            max-width: 600px;
+            margin: 6rem auto;
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .success-box h1 {
+            color: #2ed573;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .success-box p {
+            font-size: 1.2rem;
+            color: var(--dark-text);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        .success-icon {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body style="background-color: var(--light-bg)">
+    <div class="success-box">
+        <span class="success-icon">✅</span>
+        <h1>Order Confirmed!</h1>
+        <p>Your order has been placed successfully!<br>Delivery partner {{ agent }} is on the way 🚴</p>
+        <a href="/restaurants" class="btn-primary" style="text-decoration:none; display:inline-block;">Order More Food</a>
+    </div>
+</body>
+</html>
